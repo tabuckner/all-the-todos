@@ -2,7 +2,7 @@ import { TodoService } from './../services/todo/todo.service';
 import { TodoDto, AddTodoDto, EditTodoDto } from './../dto';
 
 import {
-  Controller, 
+  Controller,
   Get,
   Param,
   Post,
@@ -15,7 +15,7 @@ import {
 @Controller('todos')
 export class TodoController {
 
-  public constructor(private readonly todoService: TodoService) {}
+  public constructor(private readonly todoService: TodoService) { }
 
   @Get()
   public findAll(): Promise<TodoDto[]> {
@@ -24,22 +24,23 @@ export class TodoController {
 
   @Get(':id')
   public findOne(@Param('id') id: number): Promise<TodoDto> {
-      return this.todoService.findOne(id);
+    return this.todoService.findOne(id);
   }
 
   @Put(':id')
   public edit(@Param('id') id: number, @Body() todo: EditTodoDto): Promise<TodoDto> {
-      return this.todoService.edit(id, todo);
+    console.warn(todo)
+    return this.todoService.edit(id, todo);
   }
 
   @Post()
   public add(@Body() todo: AddTodoDto): Promise<TodoDto> {
-      return this.todoService.add(todo);
+    return this.todoService.add(todo);
   }
 
   @Delete(':id')
   public remove(@Param('id') id: number): Promise<TodoDto> {
-      return this.todoService.remove(id);
+    return this.todoService.remove(id);
   }
 
 }
